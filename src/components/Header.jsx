@@ -1,37 +1,41 @@
-import { Button, StyleSheet, Text, TextInput, View, Pressable} from 'react-native'
-import {colors} from '../global/colors.js'
+import { View, Text, Pressable, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import Search from '../components/Search'
+import { colors } from '../global/colors'
 
-const Header = ({ setCategory, setSearch }) => {
+const Header = ({ navigation }) => {
   return (
-    <>
     <View style={styles.headerContainer}>
       <View style={styles.nav}>
-          <Pressable onPress={() => setCategory("")}>
-            <Icon style={styles.goBack} name="arrow-back-ios" size={24} />
-          </Pressable>
-          <Search style={styles.search} />
-      </View>
+        <Text style={styles.title}>
+          <Icon name="local-florist" size={24} />
+          FloraApp
+        </Text> 
+
+        <Pressable onPress={() => navigation.navigate('ShippingModal')}>
           <Text style={styles.title}>
-            <Icon name="local-florist" size={24}/>
-            FloraApp
-            <Icon name="local-florist" size={24}/>
+            <Icon name="local-shipping" size={20} />
           </Text>
+        </Pressable>
+      </View>
+      <Pressable style={styles.nav}>
+        <Text style={styles.subTitle}>
+          <Icon name="location-on" size={10} />
+          Ubicación
+        </Text>
+      </Pressable>
     </View>
-  </>
-  )
-}
+  );
+};
 
 export default Header
 
 const styles = StyleSheet.create({
     headerContainer:{
-        height:200,
+        height:150,
         justifyContent: "center",
-        alignItems:"center",
+        alignItems:"start",
         backgroundColor:colors.header,
-        borderRadius:20,
+        borderRadius:12,
     },
     nav:{
       flexDirection:'row',
@@ -39,24 +43,17 @@ const styles = StyleSheet.create({
       alignItems:"center"
     },
     title:{
-        fontSize:30,
+        fontSize:25,
         color:colors.title,
         marginHorizontal:20,
         marginVertical:10,
         fontFamily:'Montserrat',
     },
-    textInput: {
-      borderWidth: 1,
-      paddingVertical: 5,
-      paddingHorizontal: 10,
-      borderColor: '#fff',
-      width: '90%',
-      backgroundColor: '#ccc',
-      marginHorizontal:10,
-    },
-    goBack: {
-      padding:10,
-      color:'#FAFBFC',
+    subTitle:{
+        fontSize:15,
+        color:colors.title,
+        marginHorizontal:30,
+        fontFamily:'Montserrat',
     },
 
 })

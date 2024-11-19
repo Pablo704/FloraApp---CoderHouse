@@ -1,11 +1,15 @@
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen'
 
-import { StatusBar } from 'expo-status-bar';
-import CategoriesScreen from './src/screens/CategoriesScreen';
-import Header from './src/components/Header';
-import ProductsScreen from './src/screens/ProductsScreen';
+import { StatusBar } from 'expo-status-bar'
+
 import {useEffect, useState} from 'react'
+import TabNavigator from './src/navigation/TabNavigator';
+import ShopNavigator from './src/navigation/ShopNavigator';
+
+import { store } from './src/app/store';
+import { Provider } from 'react-redux';
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -15,8 +19,6 @@ export default function App() {
     'Montserrat': require('./assets/Fonts/Montserrat-VariableFont_wght.ttf')
   });
   
-  const [category, setCategory] = useState("")
-
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
@@ -29,19 +31,11 @@ export default function App() {
 
 
   return (
-    <>
-    
-      <Header setCategory={setCategory} />
-      {
-        category
-        ?
-        <ProductsScreen category={category}  />
-        :
-        <CategoriesScreen setCategory={setCategory} />
-      }
-      <StatusBar style="auto" />
-
-    </>
+    <Provider store={store}>
+      <TabNavigator />
+      <StatusBar style="light" />
+    </Provider>
   );
 }
+
 

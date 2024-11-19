@@ -1,0 +1,38 @@
+[
+    {
+        "id":2,
+        "userId": 2,
+        "createdAt": 1728843630000,
+        "item":[
+            {
+                "id": 1,
+                "title": "Ficus elastica Robusta Planta de caucho - Talla recta",
+                "shortDescription": "Planta de caucho de hojas grandes, ideal para interiores.",
+                "longDescription": "El Ficus elastica Robusta es una planta de caucho conocida por sus hojas brillantes y de gran tamaño, perfecta para decorar espacios interiores con un toque tropical. De fácil mantenimiento, requiere luz indirecta y riego moderado.",
+                "price": 85,
+                "stock": 20,
+                "brand": "EcoVerde",
+                "category": "plantas",
+                "discount": 0,
+                "tags": ["new", "ofert"],
+                "mainImage": "https://assets.covet.pics/postassets/15797399/standard_resolution/a3e5cbdae95d11e1e80b77d68c26f41b",
+                "quantity": 2
+                
+            },
+            {
+                "id": 6,
+                "title": "Maceta de Cerámica Blanca - Tamaño Grande",
+                "shortDescription": "Maceta decorativa de cerámica blanca para plantas grandes.",
+                "longDescription": "Esta maceta de cerámica blanca tiene un diseño elegante y minimalista, perfecta para plantas grandes en interiores o exteriores. Su material resistente y acabado suave hacen que sea un complemento ideal para cualquier tipo de decoración.",
+                "price": 40,
+                "stock": 50,
+                "brand": "GardenStyle",
+                "category": "macetas",
+                "discount": 0,
+                "tags": ["new", "trendy"],
+                "mainImage": "https://cdn.laredoute.com/cdn-cgi/image/width=1200,height=1200,fit=pad,dpr=1/products/1/7/b/17be9c61bbf42b9898fecc3324180a29.jpg",
+                "quantity": 5
+            }
+        ]
+    }
+]

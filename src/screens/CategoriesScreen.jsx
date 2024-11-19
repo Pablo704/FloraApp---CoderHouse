@@ -1,12 +1,25 @@
-import { StyleSheet, Text, View, FlatList, Image, Pressable } from 'react-native'
-import categories from '../data/categories.json'
+import { StyleSheet, Text, View, FlatList, Image, Pressable, useWindowDimensions, ActivityIndicator } from 'react-native'
 import Cards from '../components/Cards.jsx'
+import {  useDispatch } from 'react-redux'
+import { setCategory } from '../features/shop/shopSlice.js'
+import { useGetCategoriesQuery } from '../services/shopService.js'
 
-const CategoriesScreen = ({setCategory}) => {
+
+
+const CategoriesScreen = ({navigation}) => {
+    const {width, height} = useWindowDimensions()
+
+    const { data: categories, error, isLoading} = useGetCategoriesQuery()
+    
+    const dispatch = useDispatch()
     
     const renderCategoryItem = ({item, index}) =>{
         return(
-        <Pressable onPress={()=>setCategory(item.title)}>
+        <Pressable onPress={()=>{
+                dispatch(setCategory(item.title))
+                navigation.navigate('Productos')
+                }
+            }>
             <Cards style={
                 index%2==0
                 ?{ ...styles.flatCards, ...styles.rowReverse}
@@ -25,11 +38,23 @@ const CategoriesScreen = ({setCategory}) => {
     
   return (
     < >
-      <FlatList style={styles.FlatList}
-        data={categories}
-        keyExtractor={item=>item.id}
-        renderItem={renderCategoryItem}
-      />
+        {  
+            isLoading
+            ?
+            <ActivityIndicator size="large" color={"red"}/>
+            :
+            error
+            ?
+            <Text>Error al cargar las categorias</Text>
+            :
+            <FlatList style={styles.FlatList}
+                data={categories}
+                keyExtractor={item=>item.id}
+                renderItem={renderCategoryItem}
+            />
+            
+        }
+    
     </>
   )
 }

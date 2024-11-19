@@ -1,0 +1,1 @@
+export const base_url = "https://floraapp-6fe3c-default-rtdb.firebaseio.com/"
