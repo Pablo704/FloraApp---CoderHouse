@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, Image, useWindowDimensions, FlatList, Pressable, ScrollView, ActivityIndicator} from 'react-native'
 import { useEffect, useState } from 'react'
-import {colors} from '../global/colors.js'
+import {colors} from '../../global/colors.js'
 import { useDispatch, useSelector } from 'react-redux'
-import { addItem } from '../features/cart/cartSlice.js'
-import { useGetProductQuery } from '../services/shopService.js'
+import { addItem } from '../../features/cart/cartSlice.js'
+import { useGetProductQuery } from '../../services/shop/shopService.js'
 
 const ProductScreen = ({ route }) => {
 
@@ -28,10 +28,10 @@ const ProductScreen = ({ route }) => {
         :
         <>
         <Image
-      source = {{uri: productFound.mainImage}}
-      alt = {productFound.title} 
-      width = {width} 
-      height = {width*1}
+          source = {{uri: productFound.mainImage}}
+          alt = {productFound.title} 
+          width = {width} 
+          height = {width*1}
       />
       <ScrollView style={styles.detailContainer} >
         <Text style={styles.textBrand} >{productFound.brand}</Text>

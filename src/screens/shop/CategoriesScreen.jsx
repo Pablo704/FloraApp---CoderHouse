@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, FlatList, Image, Pressable, useWindowDimensions, ActivityIndicator } from 'react-native'
-import Cards from '../components/Cards.jsx'
+import Cards from '../../components/Cards.jsx'
 import {  useDispatch } from 'react-redux'
-import { setCategory } from '../features/shop/shopSlice.js'
-import { useGetCategoriesQuery } from '../services/shopService.js'
+import { setCategory } from '../../features/shop/shopSlice.js'
+import { useGetCategoriesQuery } from '../../services/shop/shopService.js'
 
 
 

@@ -1,22 +1,22 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import CartScreen from '../screens/cart/CartScreen'
 import Header from '../components/Header'
+import SentScreen from '../screens/sent/SentScreen'
 
-const CartStack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator()
 
-const CartNavigator = () => {
+const SentNavigator = () => {
   return (
-    <CartStack.Navigator>
-        <CartStack.Screen component={CartScreen} name='Carrito'
+    <Stack.Navigator>
+        <Stack.Screen component={SentScreen} name='Detalles Envios'
         options={({ navigation }) => ({
           header: () => <Header navigation={navigation} /> 
         })}
           />
-    </CartStack.Navigator>
+    </Stack.Navigator>
   )
 }
 
-export default CartNavigator
+export default SentNavigator
 
 const styles = StyleSheet.create({})

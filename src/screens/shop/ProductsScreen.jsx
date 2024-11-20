@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { FlatList, StyleSheet, Text, View, Image, Pressable, ActivityIndicator } from 'react-native'
-import Cards from '../components/Cards'
-import Search from '../components/Search'
-import { colors } from '../global/colors'
+import Cards from '../../components/Cards.jsx'
+import Search from '../../components/Search.jsx'
+import { colors } from '../../global/colors.js'
 import { useSelector, useDispatch } from 'react-redux'
-import { useGetProductsByCategoryQuery } from '../services/shopService.js'
-import { setProductId } from '../features/shop/shopSlice'
+import { useGetProductsByCategoryQuery } from '../../services/shop/shopService.js'
+import { setProductId } from '../../features/shop/shopSlice.js'
 
 const ProductsScreen = ({ navigation }) => {
   const [productsFiltered, setProductsFiltered] = useState([])

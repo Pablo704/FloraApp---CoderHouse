@@ -1,23 +1,31 @@
 import { FlatList, StyleSheet, Text, View, Image, Pressable } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import Cards from '../components/Cards'
-import { colors } from '../global/colors'
+import Cards from '../../components/Cards'
+import { colors } from '../../global/colors'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useSelector, useDispatch } from 'react-redux'
-import { removeItem } from '../features/cart/cartSlice';
+import { clearCart, removeItem } from '../../features/cart/cartSlice';
+import { usePostReceiptMutation } from '../../services/receipts/receiptsService'
 
 
-
-const CartScreen = () => {
+const CartScreen = ({navigation}) => {
   
   const cart = useSelector(state => state.cartReducer.value.cartItems)
   const total = useSelector(state => state.cartReducer.value.total)
+  const [ triggerPost, rusult ] = usePostReceiptMutation()
+  
+  const cartLenght = useSelector(state => state.cartReducer.value.cartLenght)
+
   const dispatch = useDispatch();
 
   const FooterComponent = () =>(
     <View style={styles.footerContainer}>
       <Text style={styles.footerTotal}>Total: $ {total}</Text>
-      <Pressable style={styles.confirmButton}>
+      <Pressable style={styles.confirmButton} onPress={()=>{
+        triggerPost({cart, total, createdAt: Date.now()})
+        dispatch(clearCart())
+        navigation.navigate("ShippingDetails")
+      }}
+      >
         <Text style={styles.confirmButtonText}>Confirmar</Text>  
       </Pressable>  
     </View>
@@ -37,21 +45,32 @@ const CartScreen = () => {
                     <Text style={styles.price}>Precio c/u: ${item.price}</Text>
                     <Text style={styles.quantity}>Cantidad: {item.quantity}</Text>
                     <Text style={styles.total}>Total: $ {item.quantity * item.price}</Text>
+
                     <Pressable onPress={() => dispatch(removeItem(item.id))}>
-                    <Icon name="delete" size={24} color="#FC7A5E" style={styles.trashIcon}/>
-                  </Pressable>
-                    
+                      <Icon name="delete" size={24} color="#FC7A5E" style={styles.trashIcon}/>
+                    </Pressable>
+
                 </View>
             </Cards>
   )
   return (
-    <FlatList 
-      data={cart}
-      keyExtractor={item => item.id}
-      renderItem={renderCartItem}
-      ListHeaderComponent={<Text style={styles.cartScreenTitle}>Tu Carrito: </Text>}
-      ListFooterComponent={<FooterComponent />}
-    />
+    <>
+    {
+      cartLenght>0
+      ?
+      <FlatList 
+        data={cart}
+        keyExtractor={item => item.id}
+        renderItem={renderCartItem}
+        ListHeaderComponent={<Text style={styles.cartScreenTitle}>Tu Carrito: </Text>}
+        ListFooterComponent={<FooterComponent />}
+      />
+      :
+      <View style={styles.cartDesert}>
+        <Text style={styles.cartDesertText}>No hay productos en el carrito</Text>
+      </View>
+    }
+    </>
   )
 }
 
@@ -147,4 +166,12 @@ confirmButtonText:{
   fontSize: 16,
   fontWeight: '700',
 },
+cartDesert:{
+  flex:1,
+  justifyContent:'center',
+  alignItems:'center'
+},
+cartDesertText:{
+  fontSize:16
+}
 })

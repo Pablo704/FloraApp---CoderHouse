@@ -5,5 +5,7 @@ export const colors = {
     shadow:"#ECE9E2",
     title:"#FDFEFE",
     backgroundApp:"#FEFADF",
-    backgroundDiscount:"#CBD7D5"
+    backgroundDiscount:"#CBD7D5",
+    blanco: "white",
+    titleAuth: "#1e2026"
 }

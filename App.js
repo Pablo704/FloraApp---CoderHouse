@@ -4,7 +4,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
 
 import {useEffect, useState} from 'react'
-import TabNavigator from './src/navigation/TabNavigator';
+import MainNavigator from './src/navigation/MainNavigator'
 import ShopNavigator from './src/navigation/ShopNavigator';
 
 import { store } from './src/app/store';
@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <TabNavigator />
+      <MainNavigator />
       <StatusBar style="light" />
     </Provider>
   );

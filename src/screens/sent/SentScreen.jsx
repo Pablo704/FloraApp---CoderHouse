@@ -1,10 +1,11 @@
 import { StyleSheet, Text, FlatList } from 'react-native';
-import receipts from '../data/receipts.json';
-import Cards from "../components/Cards";
+import Cards from "../../components/Cards";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { colors } from '../../global/colors';
+import  receipts from '../../data/receipts.json'
 
 const SentScreen = () => {
-
+    
     const renderReceiptItem = ({ item }) => {
         const total = Array.isArray(item.item)
             ? item.item.reduce((acumulador, currentItem) => acumulador + currentItem.price * currentItem.quantity, 0)
@@ -43,7 +44,7 @@ const SentScreen = () => {
             data={receipts}
             keyExtractor={item => item.id.toString()}
             renderItem={renderReceiptItem}
-            ListHeaderComponent={<Text style={styles.cartScreenTitle}>Envíos:</Text>}
+            ListHeaderComponent={<Text style={styles.cartScreenTitle}>Detalles Envíos:</Text>}
             ListEmptyComponent={<Text>No hay envíos disponibles.</Text>}
         />
     );
@@ -64,13 +65,26 @@ const styles = StyleSheet.create({
         gap: 10,
       },
       title:{
-        fontWeight:'700'
+        fontWeight:'700',
+        color: colors.backgroundApp
+      },
+      date:{
+        color: colors.backgroundApp
       },
       total:{
         fontSize:16,
-        fontWeight:'700'
+        fontWeight:'700',
+        color: colors.backgroundApp
       },
       viewIcon:{
+        color: colors.backgroundApp,
         alignSelf: 'flex-end'
       },
-})
+      getProductContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: colors.backgroundApp,
+      },
+      
+}) 
