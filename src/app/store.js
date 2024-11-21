@@ -6,12 +6,14 @@ import  authReducer from '../features/auth/authSlice';
 import { receiptApi } from '../services/receipts/receiptsService';
 import { authApi } from '../services/auth/authService';
 import { userApi } from '../services/user/userService';
+import locationReducer from '../features/location/LocationSlice'
 
 export const store = configureStore({
     reducer: { 
         shopSlice,
         cartReducer,
         authReducer,
+        locationReducer,
         [shopApi.reducerPath]: shopApi.reducer,
         [receiptApi.reducerPath]: receiptApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
