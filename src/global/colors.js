@@ -7,5 +7,7 @@ export const colors = {
     backgroundApp:"#FEFADF",
     backgroundDiscount:"#CBD7D5",
     blanco: "white",
-    titleAuth: "#1e2026"
+    negro: 'blach',
+    titleAuth: "#1e2026",
+    grisClaro:'#DDDDDD'
 }

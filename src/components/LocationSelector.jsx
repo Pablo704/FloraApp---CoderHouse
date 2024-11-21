@@ -1,7 +1,8 @@
 import  { useState } from "react";
-import { View, Text, Button, TextInput, StyleSheet, Modal, TouchableOpacity, Alert, Pressable } from "react-native";
+import { View, Text, Button, TextInput, StyleSheet, Modal, Alert, Pressable } from "react-native";
 import { colors } from "../global/colors";
 import * as Location from "expo-location";
+
 
 const LocationSelector = ({ visible, onClose, onLocationSelect }) => {
   const [manualLocation, setManualLocation] = useState("")

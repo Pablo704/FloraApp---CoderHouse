@@ -1,11 +1,10 @@
-import { StyleSheet, Text, View, Image, useWindowDimensions, FlatList, Pressable, ScrollView, ActivityIndicator} from 'react-native'
-import { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, Image, useWindowDimensions, Pressable, ScrollView, ActivityIndicator} from 'react-native'
 import {colors} from '../../global/colors.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { addItem } from '../../features/cart/cartSlice.js'
 import { useGetProductQuery } from '../../services/shop/shopService.js'
 
-const ProductScreen = ({ route }) => {
+const ProductScreen = () => {
 
   const productId = useSelector(state=>state.shopSlice.value.productId)
 

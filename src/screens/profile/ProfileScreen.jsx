@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Pressable, StyleSheet, Text, View, Image, Alert } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Image, Button } from 'react-native'
 import { colors } from '../../global/colors'
 import CamaraIcon from '../../components/CamaraIcon'
 import { useSelector, useDispatch } from 'react-redux'
@@ -7,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { setProfilePicture } from '../../features/auth/authSlice'
 import { usePutProfilePictureMutation } from '../../services/user/userService'
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   const name = useSelector((state) => state.authReducer.value.name)
   const user = useSelector((state) => state.authReducer.value.email)
   const image = useSelector((state) => state.authReducer.value.profilePicture)
@@ -66,6 +65,13 @@ const ProfileScreen = () => {
         </Pressable>
       </View>
       <Text style={styles.profileData}>Email: {user}</Text>
+      <View>
+      <Text>Bienvenido a tu perfil</Text>
+      <Button
+        title="Ir a Mis lugares"
+        onPress={() => navigation.navigate('Mis lugares')}
+      />
+    </View>
     </View>
   )
 }

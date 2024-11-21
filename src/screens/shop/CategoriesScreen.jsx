@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList, Image, Pressable, useWindowDimensions, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, FlatList, Image, Pressable, ActivityIndicator } from 'react-native'
 import Cards from '../../components/Cards.jsx'
 import {  useDispatch } from 'react-redux'
 import { setCategory } from '../../features/shop/shopSlice.js'
@@ -7,7 +7,6 @@ import { useGetCategoriesQuery } from '../../services/shop/shopService.js'
 
 
 const CategoriesScreen = ({navigation}) => {
-    const {width, height} = useWindowDimensions()
 
     const { data: categories, error, isLoading} = useGetCategoriesQuery()
     
@@ -15,20 +14,21 @@ const CategoriesScreen = ({navigation}) => {
     
     const renderCategoryItem = ({item, index}) =>{
         return(
-        <Pressable onPress={()=>{
+        <Pressable 
+            onPress={()=>{
                 dispatch(setCategory(item.title))
                 navigation.navigate('Productos')
                 }
             }>
             <Cards style={
-                index%2==0
+                index%2 ===0
                 ?{ ...styles.flatCards, ...styles.rowReverse}
                 :{ ...styles.flatCards, ...styles.row}
             }>
                 <Image
                     source={{uri:item.image}}
                     style={styles.image}
-                    resizeMode='contein'
+                    resizeMode='contain'
                 />
                 <Text style={styles.categoryTitle}>{item.title}</Text>
             </Cards>
@@ -41,17 +41,17 @@ const CategoriesScreen = ({navigation}) => {
         {  
             isLoading
             ?
-            <ActivityIndicator size="large" color={"red"}/>
+            (<ActivityIndicator size="large" color={"red"}/>)
             :
             error
             ?
-            <Text>Error al cargar las categorias</Text>
+            (<Text>Error al cargar las categorias</Text>)
             :
-            <FlatList style={styles.FlatList}
+            (<FlatList style={styles.FlatList}
                 data={categories}
-                keyExtractor={item=>item.id}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={renderCategoryItem}
-            />
+            />)
             
         }
     

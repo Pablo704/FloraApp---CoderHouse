@@ -1,3 +1,3 @@
-export const base_url = "https://floraapp-6fe3c-default-rtdb.firebaseio.com/"
-export const base_auth_url = "https://identitytoolkit.googleapis.com/v1/"
-export const api_key = "AIzaSyCuHS7xN0blTm44NMe-jeoNd6M5EYkYdY4"
+export const base_url = process.env.EXPO_PUBLIC_BASE_URL
+export const base_auth_url = process.env.EXPO_PUBLIC_BESE_AUTH_URL
+export const api_key = process.env.EXPO_PUBLIC_API_KEY

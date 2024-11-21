@@ -24,17 +24,18 @@ const ProductsScreen = ({ navigation }) => {
 
   const category = useSelector(state => state.shopSlice.value.categorySelected)
 
-
   const { data: productsFilteredByCategory, error, isLoading } = useGetProductsByCategoryQuery(category)
 
   dispatch = useDispatch()
 
   useEffect(() => {
-    setProductsFiltered(productsFilteredByCategory)
-    if (search) {
-        setProductsFiltered(productsFilteredByCategory.filter(product => product.title.toLowerCase().includes(search.toLowerCase())))
+    if (productsFilteredByCategory) {
+      const filteredProducts = search
+        ? productsFilteredByCategory.filter(filterProducts)
+        : productsFilteredByCategory;
+      setProductsFiltered(filteredProducts)
     }
-}, [search,productsFilteredByCategory])
+  }, [search, productsFilteredByCategory])
 
   const renderProductItem = ({ item }) => {
     return (
@@ -64,7 +65,9 @@ const ProductsScreen = ({ navigation }) => {
               style={styles.tags}
               data={item.tags}
               keyExtractor={(tag, index) => index.toString()}
-              renderItem={({ item }) => (<Text style={styles.tagText}>{item}</Text>)}
+              renderItem={({ item }) => (
+                <Text style={styles.tagText}>{item}</Text>
+            )}
             />
           </View>
         </Cards>
@@ -75,22 +78,22 @@ const ProductsScreen = ({ navigation }) => {
   return (
     <>
       { 
-        isLoading
+        isLoading 
         ? 
-        <ActivityIndicator size="large" color={"red"} />
+        (<ActivityIndicator size="large" color={"red"} />)
         : 
         error
         ? 
-        <Text>Error al cargar los productos</Text>
+        (<Text>Error al cargar los productos</Text>)
         : 
-        <>
+        (<>
         <Search setSearch={setSearch} />
         : 
         <FlatList
             data={productsFiltered}
             keyExtractor={item => item.id.toString()}
             renderItem={renderProductItem}/>
-        </>
+        </>)
       }
     </>
   )
