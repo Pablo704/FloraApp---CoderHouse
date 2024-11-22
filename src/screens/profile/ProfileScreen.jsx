@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View, Image, Button } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Image } from 'react-native'
 import { colors } from '../../global/colors'
 import CamaraIcon from '../../components/CamaraIcon'
 import { useSelector, useDispatch } from 'react-redux'
@@ -65,12 +65,15 @@ const ProfileScreen = ({ navigation }) => {
         </Pressable>
       </View>
       <Text style={styles.profileData}>Email: {user}</Text>
-      <View>
-      <Text>Bienvenido a tu perfil</Text>
-      <Button
-        title="Ir a Mis lugares"
-        onPress={() => navigation.navigate('Mis lugares')}
-      />
+      <View style={styles.mainProfile}>
+      <Text style={styles.title}>Bienvenido a tu perfil</Text>
+      <Pressable
+        onPress={() => 
+          navigation.navigate('Mis lugares')}
+          style={styles.buttonLocation}
+        >
+          <Text>Ir a Mis lugares</Text>
+      </Pressable>
     </View>
     </View>
   )
@@ -98,7 +101,8 @@ const styles = StyleSheet.create({
   },
   profileData: {
       paddingVertical: 16,
-      fontSize: 16
+      fontSize: 16,
+      color: colors.grisClaro
   },
   cameraIcon: {
       position: 'absolute',
@@ -109,5 +113,18 @@ const styles = StyleSheet.create({
       width: 128,
       height: 128,
       borderRadius: 128
+  },
+  mainProfile:{
+    justifyContent:'center',
+    alignItems: 'center'
+  },
+  title:{
+    fontSize: 30,
+  },
+  buttonLocation:{
+    borderWidth:5,
+    borderColor: 'red',
+    backgroundColor: colors.button, //color arcane
+    padding: 10,
   }
 })

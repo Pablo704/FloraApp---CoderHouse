@@ -26,7 +26,7 @@ const ProductsScreen = ({ navigation }) => {
 
   const { data: productsFilteredByCategory, error, isLoading } = useGetProductsByCategoryQuery(category)
 
-  dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (productsFilteredByCategory) {
@@ -54,7 +54,10 @@ const ProductsScreen = ({ navigation }) => {
           <View style={styles.productsDescription}>
             <Text style={styles.productTitle}>{item.title}</Text>
             {
-              item.discount > 0 && <View style={styles.discount}><Text style={styles.discountText}>Descuento {item.discount} %</Text></View>
+              item.discount > 0 && 
+              <View style={styles.discount}>
+                <Text style={styles.discountText}>Descuento {item.discount} %</Text>
+              </View>
             }
             {
               item.stock <= 0 && <Text style={styles.noStockText}>Sin Stock</Text>
@@ -65,8 +68,7 @@ const ProductsScreen = ({ navigation }) => {
               style={styles.tags}
               data={item.tags}
               keyExtractor={(tag, index) => index.toString()}
-              renderItem={({ item }) => (
-                <Text style={styles.tagText}>{item}</Text>
+              renderItem={({ item }) => (<Text style={styles.tagText}>{item}</Text>
             )}
             />
           </View>

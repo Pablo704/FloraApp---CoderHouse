@@ -13,6 +13,7 @@ const SignupScreen = ({navigation}) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [rememberMe, setrememberMe] = useState(false)
 
     const [triggerSignup, result ] = useLoginMutation()
 
@@ -59,6 +60,24 @@ const SignupScreen = ({navigation}) => {
                     style={styles.textInput}
                     secureTextEntry
                 />
+            </View>
+            <View style={styles.rememberMeContainer}>
+                <Text style={styles.whiteText}>Mantener sesión iniciada</Text>
+                {
+                    rememberMe
+                    ?
+                    <Pressable
+                        onPress={()=> 
+                            setrememberMe(!rememberMe)}>
+                        <Icon name='toggle-on' size={48} color={'#B0E0E6'/*Powder*/} /> 
+                    </Pressable>
+                    :
+                    <Pressable
+                        onPress={()=> 
+                            setrememberMe(!rememberMe)}>
+                        <Icon name='toggle-off' size={48} color={'#CA226B'/*Violet*/} />
+                    </Pressable>
+                }
             </View>
             <View style={styles.footTextContainer}>
                 <Text style={styles.whiteText}>¿No tiene una cuenta?</Text>
@@ -148,5 +167,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
     },
-
+    rememberMeContainer:{
+        flexDirection: 'row',
+        gap: 5,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    }
 })

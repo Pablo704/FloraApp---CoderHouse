@@ -1,11 +1,12 @@
-import { StyleSheet, Text, FlatList } from 'react-native';
+import { StyleSheet, Text, FlatList, ActivityIndicator } from 'react-native';
 import Cards from "../../components/Cards";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../../global/colors';
-import  receipts from '../../data/receipts.json'
+import { useGetReceiptsQuery } from '../../services/receipts/receiptsService'
 
 const SentScreen = () => {
     
+  const { data, error, isLoading } = useGetReceiptsQuery();
+
     const renderReceiptItem = ({ item }) => {
         const total = Array.isArray(item.item)
             ? item.item.reduce((acumulador, currentItem) => acumulador + currentItem.price * currentItem.quantity, 0)
@@ -26,27 +27,38 @@ const SentScreen = () => {
 
         return (
             <Cards style={styles.receiptContainer}>
-                <Text style={styles.title}>Recibo nro: {item.id}</Text>
+                <Text style={styles.title}>Recibo nro: {item.createdAt}</Text>
                 <Text style={styles.date}>
                     Creado el {new Date(item.createdAt).toLocaleString('es-Ar', dateOptions)} Hs
                 </Text>
                 <Text style={styles.date}>
                     Envío estimado: {estimatedDeliveryDate.toLocaleDateString('es-AR', dateOptions)} Hs
                 </Text>
-                <Text style={styles.total}>Total: ${total.toFixed(2)}</Text>
-                <Icon name='visibility' size={24} style={styles.viewIcon} />
+                <Text style={styles.total}>Total: ${item.total}</Text>
             </Cards>
-        );
-    };
+        )
+    }
 
     return (
+      <> 
+      {
+        isLoading
+        ?
+        (<ActivityIndicator size="large" color={"red"}/>)
+        :
+        error
+        ?
+        <Text>Error al cargar los recibos.</Text>
+        :
         <FlatList
-            data={receipts}
+            data={data ? Object.keys(data).map((key) => ({ id: key, ...data[key] })) : []}
             keyExtractor={item => item.id.toString()}
             renderItem={renderReceiptItem}
             ListHeaderComponent={<Text style={styles.cartScreenTitle}>Detalles Envíos:</Text>}
             ListEmptyComponent={<Text>No hay envíos disponibles.</Text>}
         />
+      }
+      </>
     );
 };
 

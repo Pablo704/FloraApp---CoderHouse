@@ -5,11 +5,15 @@ import { StatusBar } from 'expo-status-bar'
 
 import {useEffect, useState} from 'react'
 import MainNavigator from './src/navigation/MainNavigator'
-import ShopNavigator from './src/navigation/ShopNavigator';
 
 import { store } from './src/app/store';
 import { Provider } from 'react-redux';
 
+/* import { init } from './src/db'
+
+init()
+  .then((result)=>console.log("Tabla creada", result))
+  .catch((error)=>console.log("Error al crear", error)) */
 
 SplashScreen.preventAutoHideAsync();
 

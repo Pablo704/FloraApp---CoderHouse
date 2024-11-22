@@ -11,9 +11,12 @@ export const receiptApi = createApi({
                 method: "POST",
                 body: receipt,
             })
-        })
+        }),
+        getReceipts: builder.query({
+            query: () => "receipts.json",
+          }),
     })
 
 })
 
-export const { usePostReceiptMutation } = receiptApi
+export const { usePostReceiptMutation, useGetReceiptsQuery } = receiptApi
