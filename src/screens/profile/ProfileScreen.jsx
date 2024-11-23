@@ -3,7 +3,7 @@ import { colors } from '../../global/colors'
 import CamaraIcon from '../../components/CamaraIcon'
 import { useSelector, useDispatch } from 'react-redux'
 import * as ImagePicker from 'expo-image-picker'
-import { setProfilePicture } from '../../features/auth/authSlice'
+import { setProfilePicture, setUser } from '../../features/auth/authSlice'
 import { usePutProfilePictureMutation } from '../../services/user/userService'
 
 const ProfileScreen = ({ navigation }) => {
@@ -12,8 +12,8 @@ const ProfileScreen = ({ navigation }) => {
   const image = useSelector((state) => state.authReducer.value.profilePicture)
   const localId = useSelector((state) => state.authReducer.value.localId)
 
-  const [putProfilePic, result] = usePutProfilePictureMutation()
-
+  const [putProfilePic] = usePutProfilePictureMutation()
+  
   const dispatch = useDispatch();
 
   const verifyCamPerms = async () => {
@@ -38,7 +38,7 @@ const ProfileScreen = ({ navigation }) => {
           putProfilePic({image:`data:image/jpeg;base64,${result.assets[0].base64}`, localId})
       }
     }
-  };
+  }
 
   return (
     <View style={styles.profileContainer}>
@@ -70,8 +70,7 @@ const ProfileScreen = ({ navigation }) => {
       <Pressable
         onPress={() => 
           navigation.navigate('Mis lugares')}
-          style={styles.buttonLocation}
-        >
+          style={styles.buttonLocation}>
           <Text>Ir a Mis lugares</Text>
       </Pressable>
     </View>
@@ -126,5 +125,29 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     backgroundColor: colors.button, //color arcane
     padding: 10,
-  }
+  },
+  logoutButton: {
+    backgroundColor: '#FF6347', // Tomate
+    padding: 10,
+    marginTop: 20,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  logoutButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  deleteButton: {
+    backgroundColor: '#DC143C', // Crimson
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  deleteButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 })

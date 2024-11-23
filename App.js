@@ -9,11 +9,6 @@ import MainNavigator from './src/navigation/MainNavigator'
 import { store } from './src/app/store';
 import { Provider } from 'react-redux';
 
-/* import { init } from './src/db'
-
-init()
-  .then((result)=>console.log("Tabla creada", result))
-  .catch((error)=>console.log("Error al crear", error)) */
 
 SplashScreen.preventAutoHideAsync();
 

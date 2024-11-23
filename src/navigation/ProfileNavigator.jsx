@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ProfileScreen from '../screens/profile/ProfileScreen'
 import Header from '../components/Header'
 import LocationVisited from '../screens/locationVisited/LocationVisited'
+import LoginScreen from "../screens/auths/LoginScreen"
 
 const ProfileStack = createNativeStackNavigator()
 

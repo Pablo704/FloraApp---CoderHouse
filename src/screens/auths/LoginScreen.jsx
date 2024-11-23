@@ -9,11 +9,10 @@ import { useDispatch } from 'react-redux';
 
 const textInputWidth = Dimensions.get('window').width*0.7
 
-const SignupScreen = ({navigation}) => {
+const LoginScreen = ({navigation}) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [rememberMe, setrememberMe] = useState(false)
 
     const [triggerSignup, result ] = useLoginMutation()
 
@@ -61,24 +60,7 @@ const SignupScreen = ({navigation}) => {
                     secureTextEntry
                 />
             </View>
-            <View style={styles.rememberMeContainer}>
-                <Text style={styles.whiteText}>Mantener sesión iniciada</Text>
-                {
-                    rememberMe
-                    ?
-                    <Pressable
-                        onPress={()=> 
-                            setrememberMe(!rememberMe)}>
-                        <Icon name='toggle-on' size={48} color={'#B0E0E6'/*Powder*/} /> 
-                    </Pressable>
-                    :
-                    <Pressable
-                        onPress={()=> 
-                            setrememberMe(!rememberMe)}>
-                        <Icon name='toggle-off' size={48} color={'#CA226B'/*Violet*/} />
-                    </Pressable>
-                }
-            </View>
+
             <View style={styles.footTextContainer}>
                 <Text style={styles.whiteText}>¿No tiene una cuenta?</Text>
                 <Pressable onPress={() => navigation.navigate('Signup')}>
@@ -100,7 +82,7 @@ const SignupScreen = ({navigation}) => {
       )
 }
 
-export default SignupScreen
+export default LoginScreen
 
 const styles = StyleSheet.create({
     gradient: {
