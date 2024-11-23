@@ -121,13 +121,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   buttonLocation:{
-    borderWidth:5,
-    borderColor: 'red',
-    backgroundColor: colors.button, //color arcane
+    borderWidth:2,
+    borderColor: '#B0E0E6',
+    backgroundColor: "#CA226B",
     padding: 10,
   },
   logoutButton: {
-    backgroundColor: '#FF6347', // Tomate
+    backgroundColor: '#FF6347',
     padding: 10,
     marginTop: 20,
     borderRadius: 5,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   deleteButton: {
-    backgroundColor: '#DC143C', // Crimson
+    backgroundColor: '#DC143C',
     padding: 10,
     marginTop: 10,
     borderRadius: 5,

@@ -4,17 +4,20 @@ import { base_url } from '../../firebase/database'
 export const receiptApi = createApi({
     reducerPath: "receiptApi",
     baseQuery: fetchBaseQuery({ baseUrl: base_url}),
+    tagTypes: ['receipts'],
     endpoints: (builder) =>({
         postReceipt: builder.mutation({
-            query: ({ ...receipt }) =>({
+            query: ({ ...receipt }) => ({
                 url: "receipts.json",
                 method: "POST",
                 body: receipt,
-            })
+            }),
+            invalidatesTags: ['receipts'], 
         }),
         getReceipts: builder.query({
             query: () => "receipts.json",
-          }),
+            providesTags: ['receipts'],
+        }),
     })
 
 })

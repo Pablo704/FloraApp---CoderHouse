@@ -5,8 +5,11 @@ import CartNavigator from "./CartNavigator";
 import ProfileNavigator from "./ProfileNavigator";
 import SentNavigator from "./SentNavigator";
 import { StyleSheet } from "react-native";
+import { useSelector } from "react-redux";
+
 
 const Tab = createBottomTabNavigator();
+
 
 const TabNavigator = () => (
   <Tab.Navigator

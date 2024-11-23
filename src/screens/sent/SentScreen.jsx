@@ -2,11 +2,16 @@ import { StyleSheet, Text, FlatList, ActivityIndicator } from 'react-native';
 import Cards from "../../components/Cards";
 import { colors } from '../../global/colors';
 import { useGetReceiptsQuery } from '../../services/receipts/receiptsService'
+import { useEffect } from 'react';
 
 const SentScreen = () => {
     
-  const { data, error, isLoading } = useGetReceiptsQuery();
+  const { data, error, isLoading, refetch } = useGetReceiptsQuery();
 
+  useEffect(() => {
+    refetch();
+  }, []);
+  
     const renderReceiptItem = ({ item }) => {
         const total = Array.isArray(item.item)
             ? item.item.reduce((acumulador, currentItem) => acumulador + currentItem.price * currentItem.quantity, 0)
@@ -55,7 +60,7 @@ const SentScreen = () => {
             keyExtractor={item => item.id.toString()}
             renderItem={renderReceiptItem}
             ListHeaderComponent={<Text style={styles.cartScreenTitle}>Detalles Envíos:</Text>}
-            ListEmptyComponent={<Text>No hay envíos disponibles.</Text>}
+            ListEmptyComponent={<Text style={styles.cartScreenSubTitle}>No hay envíos disponibles.</Text>}
         />
       }
       </>
@@ -72,6 +77,7 @@ const styles = StyleSheet.create({
         paddingVertical: 30,
       },
       receiptContainer:{
+        marginVertical: 10,
         padding:20,
         justifyContent: "flex-start",
         gap: 10,
@@ -98,5 +104,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: colors.backgroundApp,
       },
-      
+      cartScreenSubTitle:{
+        fontSize:20,
+        textAlign: "center",
+        paddingVertical: 30,
+      }
 }) 
